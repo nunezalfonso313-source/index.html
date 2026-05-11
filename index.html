@@ -115,7 +115,31 @@ function addMsg(role,text){
   const area=document.getElementById('chat-area');
   const div=document.createElement('div');
   div.className='msg '+role;
-  div.innerHTML=`<div class="msg-avatar">${role==='bot'?'⚙':'👤'}</div><div class="msg-content"><div class="msg-label">${role==='bot'?'CMM ASSISTANT':'OPERADOR'}</div><div class="msg-bubble">${text.replace(/\n/g,'<br>')}</div></div>`;
+  
+function fixGDTSymbols(text){
+
+  const replacements = {
+    "**Cilindricidad**:": "**Cilindricidad**: ⌭",
+    "**Planicidad**:": "**Planicidad**: ⏥",
+    "**Rectitud**:": "**Rectitud**: ─",
+    "**Concentricidad**:": "**Concentricidad**: ◎",
+    "**Circularidad**:": "**Circularidad**: ○",
+    "**Perpendicularidad**:": "**Perpendicularidad**: ⟂",
+    "**Paralelismo**:": "**Paralelismo**: ∥",
+    "**Angularidad**:": "**Angularidad**: ∠",
+    "**Posición**:": "**Posición**: ⌖",
+    "**Diámetro**:": "**Diámetro**: ⌀",
+    "**Más/Menos**:": "**Más/Menos**: ±"
+  };
+
+  for (const key in replacements) {
+    text = text.replaceAll(key, replacements[key]);
+  }
+
+  return text;
+}
+
+div.innerHTML=`<div class="msg-avatar">${role==='bot'?'⚙':'👤'}</div><div class="msg-content"><div class="msg-label">${role==='bot'?'CMM ASSISTANT':'OPERADOR'}</div><div class="msg-bubble">${fixGDTSymbols(text).replace(/\n/g,'<br>')}</div></div>`;
   area.appendChild(div);
   area.scrollTop=area.scrollHeight;
 }
