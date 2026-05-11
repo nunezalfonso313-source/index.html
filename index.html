@@ -116,6 +116,52 @@ function addMsg(role,text){
   const div=document.createElement('div');
   div.className='msg '+role;
   
+
+
+function getGDTSymbolsReference(){
+return `
+<h3>Principales símbolos GD&T (ASME Y14.5)</h3>
+
+<table style="width:100%;border-collapse:collapse;font-size:14px">
+<tr>
+<th style="border:1px solid #444;padding:6px">Símbolo</th>
+<th style="border:1px solid #444;padding:6px">Control</th>
+<th style="border:1px solid #444;padding:6px">Tipo</th>
+</tr>
+
+<tr><td style="border:1px solid #444;padding:6px">─</td><td style="border:1px solid #444;padding:6px">Rectitud</td><td style="border:1px solid #444;padding:6px">Forma</td></tr>
+
+<tr><td style="border:1px solid #444;padding:6px">⏥</td><td style="border:1px solid #444;padding:6px">Planicidad</td><td style="border:1px solid #444;padding:6px">Forma</td></tr>
+
+<tr><td style="border:1px solid #444;padding:6px">○</td><td style="border:1px solid #444;padding:6px">Circularidad</td><td style="border:1px solid #444;padding:6px">Forma</td></tr>
+
+<tr><td style="border:1px solid #444;padding:6px">⌭</td><td style="border:1px solid #444;padding:6px">Cilindricidad</td><td style="border:1px solid #444;padding:6px">Forma</td></tr>
+
+<tr><td style="border:1px solid #444;padding:6px">⌒</td><td style="border:1px solid #444;padding:6px">Perfil de línea</td><td style="border:1px solid #444;padding:6px">Perfil</td></tr>
+
+<tr><td style="border:1px solid #444;padding:6px">⌓</td><td style="border:1px solid #444;padding:6px">Perfil de superficie</td><td style="border:1px solid #444;padding:6px">Perfil</td></tr>
+
+<tr><td style="border:1px solid #444;padding:6px">∥</td><td style="border:1px solid #444;padding:6px">Paralelismo</td><td style="border:1px solid #444;padding:6px">Orientación</td></tr>
+
+<tr><td style="border:1px solid #444;padding:6px">⟂</td><td style="border:1px solid #444;padding:6px">Perpendicularidad</td><td style="border:1px solid #444;padding:6px">Orientación</td></tr>
+
+<tr><td style="border:1px solid #444;padding:6px">∠</td><td style="border:1px solid #444;padding:6px">Angularidad</td><td style="border:1px solid #444;padding:6px">Orientación</td></tr>
+
+<tr><td style="border:1px solid #444;padding:6px">⌖</td><td style="border:1px solid #444;padding:6px">Posición</td><td style="border:1px solid #444;padding:6px">Ubicación</td></tr>
+
+<tr><td style="border:1px solid #444;padding:6px">◎</td><td style="border:1px solid #444;padding:6px">Concentricidad</td><td style="border:1px solid #444;padding:6px">Ubicación</td></tr>
+
+<tr><td style="border:1px solid #444;padding:6px">⌯</td><td style="border:1px solid #444;padding:6px">Simetría</td><td style="border:1px solid #444;padding:6px">Ubicación</td></tr>
+
+<tr><td style="border:1px solid #444;padding:6px">↗</td><td style="border:1px solid #444;padding:6px">Runout circular</td><td style="border:1px solid #444;padding:6px">Runout</td></tr>
+
+<tr><td style="border:1px solid #444;padding:6px">↗↗</td><td style="border:1px solid #444;padding:6px">Runout total</td><td style="border:1px solid #444;padding:6px">Runout</td></tr>
+
+</table>
+`;
+}
+
+
 function fixGDTSymbols(text){
 
   const replacements = {
@@ -137,6 +183,14 @@ function fixGDTSymbols(text){
   }
 
   return text;
+}
+
+
+if(
+text.toLowerCase().includes("simbolos") &&
+text.toLowerCase().includes("gd&t")
+){
+text = getGDTSymbolsReference();
 }
 
 div.innerHTML=`<div class="msg-avatar">${role==='bot'?'⚙':'👤'}</div><div class="msg-content"><div class="msg-label">${role==='bot'?'CMM ASSISTANT':'OPERADOR'}</div><div class="msg-bubble">${fixGDTSymbols(text).replace(/\n/g,'<br>')}</div></div>`;
